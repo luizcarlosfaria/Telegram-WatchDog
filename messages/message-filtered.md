@@ -11,7 +11,7 @@ Visando entregar uma melhor qualidade e experiência para os usuários dos grupo
 * Notas Falsas
 * Celulares Roubados
 
-Fique atento à legislação, tanto comprar quanto comercializar essas coisas é crime!
+Tanto comprar quanto comercializar essas coisas é crime!
 
 Por conta da quantidade de spam gerado com criptomoédas, a publicação de publicidade a respeito desse assunto é proíbida também.
 
