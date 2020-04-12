@@ -20,5 +20,8 @@ namespace Telegram.WatchDog.Commands
             this.aclService = aclService;
         }
 
+        public void Handle(Message message)
+        {
+        }
     }
 }

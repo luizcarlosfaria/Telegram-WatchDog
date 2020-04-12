@@ -30,17 +30,18 @@ namespace Telegram.WatchDog
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            UpdateType[] updateTypes = new[] {
+            /*
                 UpdateType.Message,
                 UpdateType.EditedMessage,
                 UpdateType.ChannelPost,
                 UpdateType.EditedChannelPost
-            };
-
+            */
+            UpdateType[] updateTypes = null;
             if (this.services.Any())
             {
-                foreach (var service in this.services)
-                    await service.Initialize(cancellationToken);
+                await this.InitializeServices(cancellationToken);
+
+                updateTypes = this.GetRequiredUpdateTypes();
             }
 
             this.botClient.StartReceiving(updateTypes, cancellationToken);
@@ -56,6 +57,30 @@ namespace Telegram.WatchDog
             this.botClient.StopReceiving();
         }
 
+        private UpdateType[] GetRequiredUpdateTypes()
+        {
+            List<UpdateType> updateTypes = new List<UpdateType>();
+
+            foreach (var service in this.services)
+            {
+                var updates = service.RequiredUpdates;
+                if (updates.Any())
+                {
+                    updateTypes.AddRange(updates);
+                }
+            }
+
+            return updateTypes.Distinct().ToArray();
+        }
+
+        private async Task InitializeServices(CancellationToken cancellationToken)
+        {
+            foreach (var service in this.services)
+            {
+                await service.Initialize(cancellationToken);
+            }
+        }
+
         private async Task MainThread(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
@@ -67,6 +92,6 @@ namespace Telegram.WatchDog
 
 
 
-        
+
     }
 }

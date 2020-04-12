@@ -11,6 +11,6 @@ namespace Telegram.WatchDog.Commands
 
         public string Description { get; }
 
-        
+        void Handle(Message message);
     }
 }

@@ -12,12 +12,14 @@ using Telegram.WatchDog.Commands;
 
 namespace Telegram.WatchDog.Services
 {
-    public class CommandService: IService
+    public class CommandService : IService
     {
         private readonly ILogger<CommandService> logger;
         private readonly TelegramBotClient botClient;
         private readonly User me;
         private readonly IEnumerable<ICommand> commands;
+
+        public IEnumerable<UpdateType> RequiredUpdates => new UpdateType[] { UpdateType.Message };
 
         public CommandService(ILogger<CommandService> logger, TelegramBotClient botClient, User user, IEnumerable<ICommand> commands)
         {
@@ -42,25 +44,19 @@ namespace Telegram.WatchDog.Services
         }
 
         public Task Stop(CancellationToken cancellationToken) => Task.CompletedTask;
-        
+
 
         private void BotClient_OnMessage(object sender, Bot.Args.MessageEventArgs e)
         {
-            MessageEntity firstMessageEntity = e.Message.Entities != null ?
-                                                        e.Message.Entities.Any() ?
-                                                            e.Message.Entities.FirstOrDefault()
-                                                                : null
-                                                                    : null;
+            (MessageEntity firstMessageEntity, string commandText) = e.Message.GetFirstEntityOf(it => it.Type == MessageEntityType.BotCommand);
 
-            if (this.commands.Any() && firstMessageEntity != null && e.Message.Type == MessageType.Text && firstMessageEntity.Type == MessageEntityType.BotCommand)
+            if (this.commands.Any() && firstMessageEntity != null && e.Message.Type == MessageType.Text)
             {
-                string commandText = e.Message.Text.Substring(firstMessageEntity.Offset, firstMessageEntity.Length);
-
                 ICommand command = this.commands.FirstOrDefault(it => it.Command == commandText || $"{it.Command}@{this.me.Username}" == commandText);
 
                 if (command != null)
                 {
-
+                    command.Handle(e.Message);
                 }
 
                 this.logger.LogInformation("Command: {time}", e.Message.Entities.First().ToString());

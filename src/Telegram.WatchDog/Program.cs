@@ -25,13 +25,13 @@ namespace Telegram.WatchDog
                 {
                     services.AddSingleton(sp => new TelegramBotClient(GetEnv("TELEGRAM_API_TOKEN")));
 
-                    services.AddSingleton(sp => sp.GetRequiredService<TelegramBotClient>().GetMeAsync().GetAwaiter().GetResult());
+                    services.AddSingleton(sp => sp.GetRequiredService<TelegramBotClient>().GetMeAsync().Sync());
 
                     services.AddSingleton2<IService, AclService>();
 
                     services.AddSingleton2<IService, CommandService>();
 
-                    services.AddSingleton<ICommand, MeCommand>();
+                    services.AddSingleton<ICommand, WhoisCommand>();
 
                     services.AddSingleton<ICommand, BanCommand>();
 
