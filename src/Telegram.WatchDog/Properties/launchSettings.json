@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Telegram.WatchDog": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "TELEGRAM_API_TOKEN": "540963106:AAFCUhYyiqT0AkSAwkiisfcoY80QgDYkesY"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30001.183
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.WatchDog", "Telegram.WatchDog\Telegram.WatchDog.csproj", "{6CD3F9C6-0D94-4188-A411-A36E9A99F16F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CD3F9C6-0D94-4188-A411-A36E9A99F16F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CD3F9C6-0D94-4188-A411-A36E9A99F16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CD3F9C6-0D94-4188-A411-A36E9A99F16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CD3F9C6-0D94-4188-A411-A36E9A99F16F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D23F7917-D2AE-43EC-AC14-FB0E6E5CDFAB}
+	EndGlobalSection
+EndGlobal
