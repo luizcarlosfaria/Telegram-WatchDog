@@ -32,10 +32,12 @@ namespace Telegram.WatchDog.Services
 
         }
 
-        public bool IsAdmin(User from, Chat chat)
+        public bool IsAdmin(User user, Chat chat) => this.Is(user, chat, it => true);
+
+        public bool Is(User user, Chat chat, Func<ChatMember, bool> func)
         {
             var admins = botClient.GetChatAdministratorsAsync(chat.Id).Sync();
-            return admins.Any(it => it.User.Id == from.Id);
+            return admins.Any(it => it.User.Id == user.Id && func(it));
         }
     }
 }
