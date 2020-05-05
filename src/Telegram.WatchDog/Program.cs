@@ -30,6 +30,8 @@ namespace Telegram.WatchDog
                     services.AddSingleton2<IService, AclService>();
 
                     services.AddSingleton2<IService, CommandService>();
+                    
+                    services.AddSingleton2<IService, SpamFilterService>();
 
                     services.AddSingleton<ICommand, WhoisCommand>();
 
